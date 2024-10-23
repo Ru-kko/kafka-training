@@ -1,5 +1,6 @@
 package co.example.kafkatraining.config;
 
+import co.example.kafkatraining.schemas.ItemMessage;
 import co.example.kafkatraining.schemas.Sale;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -46,6 +47,20 @@ public class ConsumerConfigs {
                 new JsonDeserializer<>(Sale.class));
 
         var factory = new ConcurrentKafkaListenerContainerFactory<String, Sale>();
+        factory.setConsumerFactory(consumerFactory);
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.valueOf(ackMode.toUpperCase()));
+
+        return factory;
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, ItemMessage> itemsListenerContainerFactory() {
+        var consumerFactory = new DefaultKafkaConsumerFactory<>(
+                consumerConfigs(),
+                new StringDeserializer(),
+                new JsonDeserializer<>(ItemMessage.class));
+
+        var factory = new ConcurrentKafkaListenerContainerFactory<String, ItemMessage>();
         factory.setConsumerFactory(consumerFactory);
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.valueOf(ackMode.toUpperCase()));
 
