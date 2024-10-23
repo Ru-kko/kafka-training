@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class SaleConsumer {
     private final SalesHandler handler;
 
-    @KafkaListener(id = "SALES", topics = "SALES", containerFactory = "#{consumerConfigs.salesListenerContainerFactory}")
+    @KafkaListener(id = "SALES", topics = "${app.topics.sales}", containerFactory = "#{consumerConfigs.salesListenerContainerFactory}")
     public void consume(Sale message) {
         handler.process(message);
     }

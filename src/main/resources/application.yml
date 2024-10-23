@@ -1,5 +1,4 @@
 spring:
-
   application:
     name: kafka-training
 
@@ -27,6 +26,14 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       retries: 3
-
     listener:
       ack-mode: record     # por defecto es en BATCH
+
+app:
+  topics:
+    items: ITEMS
+    sales: SALES
+    low-stock: INVENTORY_ALERTS
+    insufficient-stock: INSUFFICIENT_STOCK
+    refund: REFUND
+    high-stock: HIGH-STOCK
