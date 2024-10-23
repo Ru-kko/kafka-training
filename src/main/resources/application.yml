@@ -8,38 +8,25 @@ spring:
     username: admin
     password: admin123
     driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
 
-
   kafka:
-
     bootstrap-servers: "localhost:9093"
-
     admin:
       auto-create: true   #por defecto es true es decir crea los topicos automaticamente
       client-id: kafka-training
-
     consumer:
+      auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       group-id: default-group-id
-
-      properties:
-        spring:
-          json:
-            trusted:
-              packages: '*'
-
+      properties.spring.json.trusted.packages: '*'
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       retries: 3
 
-
     listener:
-      ack-mode: record     #por defecto es en BATCH
-
-
+      ack-mode: record     # por defecto es en BATCH
