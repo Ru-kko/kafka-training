@@ -19,4 +19,9 @@ public class ApplicationProperties {
     private String insufficientStockTopic;
     @Value("${app.topics.low-stock}")
     private String lowStockTopic;
+
+    @Value("${app.stock.low-stock}")
+    private Integer lowStock;
+    @Value("${app.stock.high-stock}")
+    private Integer highStock;
 }

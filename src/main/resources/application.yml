@@ -37,3 +37,6 @@ app:
     insufficient-stock: INSUFFICIENT_STOCK
     refund: REFUND
     high-stock: HIGH-STOCK
+  stock:
+    low-stock: 100
+    high-stock: 200
